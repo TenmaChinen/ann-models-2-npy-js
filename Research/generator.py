@@ -37,7 +37,7 @@ def get_layers_cnf(d_model_config):
     l_keys = ['name','units','dtype','activation','use_bias']
     l_layers_cnf = []
     for layer in d_model_config['config']['layers']:
-        if layer['class_name'] != 'InputLayer' :
+        if layer['class_name'] not in ['InputLayer','Dropout' ] :
             l_layers_cnf.append({ k : layer['config'][k] for k in l_keys })
     return l_layers_cnf
     
