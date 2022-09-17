@@ -1,4 +1,30 @@
-/* dActs */
+class Model{
+    constructor(){
+        // (1) code_layers_class_instance
+        this.layers = [ Dense(activation=sigmoid, weights=[ new Matrix([[-0.5692449808120728, 7.034882068634033, 0.8901565670967102, -1.2982566356658936, -7.78250789642334, -0.596753716468811, -3.094672679901123, 0.4607388377189636, -0.5057770609855652, -0.3972644507884979], [-0.9048697352409363, 6.902655124664307, 1.6131205558776855, -0.23207269608974457, 5.748035907745361, -0.43503740429878235, 5.758194923400879, 2.4055724143981934, -1.5594075918197632, -1.570223331451416]]), new Matrix([-0.07483713328838348, -4.254740238189697, -0.608847975730896, -0.5387024283409119, -0.8356730341911316, -0.22868682444095612, -0.4641977548599243, -1.3353506326675415, 0.20014885067939758, 0.09103742241859436]) ]), Dense(activation=linear, weights=[ new Matrix([[0.12166593223810196], [1.637164831161499], [-0.4853067398071289], [0.09327518194913864], [1.5986828804016113], [0.031022746115922928], [-1.3279681205749512], [-0.7030462622642517], [0.2715253531932831], [0.3019183874130249]]), 0 ]) ]; 
+        this.numLayers = this.layers.length;
+    }
+        
+    pred(x){
+        let output = parseInput(x);
+        for ( let idx = 0, idx < this.numLayers ; idx++){
+            output = this.layers[idx];
+        }
+        return output;
+    }
+}
+
+function parseInput(x){
+    if ( x instanceof Matrix ){
+        return new Matrix( x.mat );
+    } else if ( x instanceof Array ){
+        return  x[0].length ? x : [x] ;
+    } else {
+        return null;
+    }
+}
+
+// (2) code_apply_func
 function applyFunc(matrix,fnc){
     const resMatrix = new Matrix(matrix.mat);
     for (let row = 0; row < matrix.rows; row++) {
@@ -9,36 +35,24 @@ function applyFunc(matrix,fnc){
     return resMatrix;
 }
 
+// (3) code_act_funcs
 sigmoid = (m) => applyFunc(m, (v) => (1/(1+Math.exp(-v))) );
 linear = (m) => m;
-dActs = { 'sigmoid' : sigmoid, 'linear' : linear }
 
-class Model{
-    constructor(){
-        // TODO : Convert each array to matrix class
-        this.arrW = [ new Matrix([[3.43982195854187, -2.1938624382019043], [-3.442089080810547, 2.1947953701019287]]),new Matrix([[2.161045789718628], [2.374002456665039]])];
-        this.arrB = [ new Matrix([[-2.5171163082122803, -1.4680142402648926]]),new Matrix([[-0.6058771014213562]])];
-        this.arrA = ['sigmoid', 'linear'];
-        this.numLayers = this.arrW.length;
+// (4) code_layers_class
+class Dense {
+  
+    constructor(activation, weights ) {
+        this.activation = activation;
+        [ this.kernel , this.bias ] = weights;
     }
-        
-    pred(x){
-        let output = new Matrix([...x]);
-        
-        for (let idx = 0; idx < this.numLayers; idx++){
-            const actFuntion = dActs[this.arrA[idx]];
-            const weights = this.arrW[idx];
-            const bias = this.arrB[idx];
-            if ( bias != 0 ){
-                output = actFuntion(output.dot(weights).add(bias));
-            }else{
-                output = actFuntion(output.dot(weights));
-            }
-        }
-        return output;
-    }
+    
+    predict(x){
+        return this.activation(x.dot(this.kernel).add(this.bias);
+    }   
 }
 
+// (5) code_matrix
 class Matrix {
   rows = null;
   cols = null;
@@ -179,4 +193,4 @@ class Matrix {
 
 const matA = new Matrix([[0, 2, 3], [4, 5, 6]]);
 const matB = new Matrix([[10, 2], [4, 5], [2, 1]]);
-const matC = new Matrix([[4, 1, 2], [6, 3, 0]]);
+const matC = new Matrix([[4, 1, 2], [6, 3, 0]]); 

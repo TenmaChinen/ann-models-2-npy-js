@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Model</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  
+</body>
+<script src="model_xor.js"></script>
+<!-- <script src="model_iris.js"></script> -->
+
+<script>
+
+  const model = new Model();
+  // const input = new Matrix([[0,0],[0,1],[1,0],[1,1]]);
+  const input = datasets.xor;
+  // const input = datasets.iris;
+
+  const pred = model.predict(input);
+  console.log(pred);
+  pred.round(2).print();
+
+
+</script>
+</html>

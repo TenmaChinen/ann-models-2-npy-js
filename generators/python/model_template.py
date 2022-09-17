@@ -1,5 +1,5 @@
 import numpy as np
-    
+
 class Model:
     def __init__(self):
         self.l_layers = {str_code_l_layers_class_instantiation}
