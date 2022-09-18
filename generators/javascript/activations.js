@@ -16,12 +16,8 @@ softsign = (m) => applyFunc(m, (v) => v / (1+Math.abs(v)));#
 tanh = (m) => applyFunc(m, (v) => Math.tanh(v));#
 
 // leaky_relu = lambda x : np.where(x > 0, x, x * 0.01);
-// function softmax(m){
-//     function fnc(v){
-//         const expV = Math.exp(v-M
-//         return 
-//     }
-// }
 
-//     exp_x = np.exp(x - np.max(x))
-//     return exp_x/exp_x.sum(axis=1, keepdims=True);
+function softmax(m){
+    const matExp = m.sub(m.max()).exp();
+    return matExp.divide( matExp.sum(1) ); 
+}

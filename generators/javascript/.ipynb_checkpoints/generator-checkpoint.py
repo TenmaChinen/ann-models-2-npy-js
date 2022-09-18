@@ -82,14 +82,14 @@ class JsStringCode:
     #######################################
     
     def get_code_activation_func(self, activation_name):
-        pattern = f'(function )?{activation_name}[^#]*'
+        pattern = f'(?<![/ *])(function )?{activation_name}[^#]*'
         result = re.search(pattern, self.code_acts_func)
         if result:
             return result.group()
         return ''
     
     def get_code_layer_class(self, layer_type):
-        pattern = f'class {layer_type}[^#]*'
+        pattern = f'(?<![/ *])class {layer_type}[^#]*'
         result = re.search(pattern, self.code_layers_class)
         if result : return result.group()
     

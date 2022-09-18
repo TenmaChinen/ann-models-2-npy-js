@@ -44,7 +44,10 @@ function parseInput(x){
 
 %s
 
-// XOR
+
+/* #############################
+   ####   D A T A S E T S   ####
+   ############################# */
 
 const datasets = {
     xor : new Matrix([[0,0],[0,1],[1,0],[1,1]]),
