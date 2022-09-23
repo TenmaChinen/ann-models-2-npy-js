@@ -2,7 +2,7 @@ import numpy as np
 
 class Model:
     def __init__(self):
-        self.l_layers = {str_code_l_layers_class_instantiation}
+        self.l_layers = {code_l_layers_class_instantiation}
         
     def predict(self,x):
         output = x.copy()
@@ -11,5 +11,5 @@ class Model:
             
         return output
     
-{str_code_layer_classes}
-{str_code_activation_functions}
+{code_layer_classes}
+{code_activation_functions}
